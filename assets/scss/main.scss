@@ -12,18 +12,27 @@ $color_s_dark:#c56200;
 }
 nav{
   width:100vw;
-  position:fixed;
+  position:sticky;
   top:0;
 }
 .nav-links{
   list-style: none;
   display:flex;
   justify-content: space-between;
+  li{
+    margin:$padding;
+  }
 }
-.searchbar{
-  flex-grow: 1
+#searchbar{
+  flex-grow: 1;
+  text-align: center;
+  form{
+    display:flex;
+  }
+}
+#searchinput{
+  width:100%;
 }
 .nav-container{
   background-color: $color_p;
-  padding:$padding;
 }
