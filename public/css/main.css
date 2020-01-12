@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+nav {
+  width: 100vw;
+  position: fixed;
+  top: 0; }
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: space-between; }
+
+.searchbar {
+  flex-grow: 1; }
+
+.nav-container {
+  background-color: #00e676;
+  padding: 15px; }
