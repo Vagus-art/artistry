@@ -1,6 +1,12 @@
-{{#each results}}
-    {{#with this}}
-        <h1>{{this.title}}</h1>
-    {{/with}}
-{{/each}}
+<ul id="search-results">
+    {{#each results}}
+        {{#with this}}
+            <li>
+                <h1>{{this.title}}</h1>
+                <h3>{{this.content}}</h3>
+                <p>{{this.date}}</p>
+            </li>
+        {{/with}}
+    {{/each}}
+</ul>
 {{message}}
