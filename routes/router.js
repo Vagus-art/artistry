@@ -49,7 +49,7 @@ router.post('/signup',async (req,res)=>{
     email:req.body.email
   });
   await user.save();
-  res.render('Home',{message:'User ' + req.body.nickname + ' has been registered succesfully'});
+  res.render('home',{message:'User ' + req.body.nickname + ' has been registered succesfully'});
 });
 router.post('/login',async (req,res)=>{
   try{
