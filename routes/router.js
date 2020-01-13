@@ -7,8 +7,20 @@ router.get('/',(req,res)=>{
   res.render('home');
 });
 router.get('/search', async (req,res)=>{
-  const result = await postModel.findOne({title:req.params.searchbar});
-  res.render('search',{results:result});
+  try{
+    //search for partial string
+    myregex = new RegExp(req.query.searchbar,"i");
+    const result = await postModel.find({title:{ $regex: myregex, $options: 'i' }}).lean();
+    if(result.length!=0){
+      res.render('search',{results:result});
+    }
+    else{
+      res.render('search',{message:'No results found for \"' + req.query.searchbar + "\""});
+    }
+  }
+  catch(err){
+    console.log(err);
+  }
 })
 
 //api

@@ -1,2 +1,6 @@
-{{results.title}}
-asd
+{{#each results}}
+    {{#with this}}
+        <h1>{{this.title}}</h1>
+    {{/with}}
+{{/each}}
+{{message}}
