@@ -11,10 +11,6 @@ const uuid = require('uuid');
 
 var sess;
 
-//handlebars
-app.engine('handlebars', exphbs());
-app.set('view engine', 'handlebars');
-
 //middleware
 app.use(express.static('./public'));
 // parse application/x-www-form-urlencoded
