@@ -1,5 +1,5 @@
 const express = require('express');
-const app = module.exports = express();
+const app = express();
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const database = require('./database.js');
