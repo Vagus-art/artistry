@@ -9,36 +9,26 @@ let check = ()=>(sess.nickname!=undefined);
 
 
 //get
-router.get('/',(req,res)=>{
-  sess = req.session;
-  res.render('home',{message:'Welcome to artistry! Log in or Sign up to show your talents.',nickname:sess.nickname,chcksess:check()});
-});
 router.get('/search', async (req,res)=>{
   try{
     sess = req.session;
     //search for partial string
-    myregex = new RegExp(req.query.searchbar,"i");
+    myregex = new RegExp(req.body.searchbar,"i");
     const result = await postModel.find({title:{ $regex: myregex }}).lean();
     if(result.length!=0){
-      res.render('search',{results:result,chcksess:check()});
+      res.json({results:result});
     }
     else{
-      res.render('search',{message:'No results found for \"' + req.query.searchbar + "\"",chcksess:check()});
+      res.json({message:'No results found for ' + req.body.searchbar});
     }
   }
   catch(err){
     console.log('there has been an error on the search route: ' + err);
   }
 });
-router.get('/login',(req,res)=>{
-  res.render('login');
-});
-router.get('/signup',(req,res)=>{
-  res.render('signup');
-});
 router.get('/logout',(req,res)=>{
   req.session.destroy();
-  res.redirect('/');
+  res.send('User logged');
 })
 
 //post
@@ -49,7 +39,7 @@ router.post('/signup',async (req,res)=>{
     email:req.body.email
   });
   await user.save();
-  res.render('home',{message:'User ' + req.body.nickname + ' has been registered succesfully'});
+  res.json({message:'Registered succesfully'});
 });
 router.post('/login',async (req,res)=>{
   try{
@@ -60,14 +50,14 @@ router.post('/login',async (req,res)=>{
         const match = await bcrypt.compare(password,user.password);
         if(match){
         sess.nickname = nickname;
-        res.redirect('/');
+        res.json({message:'Logged successfully'});
         }
         else{
-        res.render('login',{message:"Password invalid!"});
+        res.json({message:"Password invalid!"});
         }
     }
     else{
-        res.render('login',{message:'Nickname not found!'})
+        res.json({message:'Nickname not found!'})
     }
 }
 catch(error){
