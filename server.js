@@ -1,7 +1,5 @@
 const express = require('express');
 const app = express();
-const exphbs = require('express-handlebars');
-const mongoose = require('mongoose');
 const database = require('./database.js');
 const port = process.env.PORT || 3000;
 const router = require('./routes/router.js');
@@ -12,7 +10,7 @@ const uuid = require('uuid');
 var sess;
 
 //middleware
-app.use(express.static('./public'));
+app.use(express.static('./build'));
 // parse application/x-www-form-urlencoded
 app.use(bodyparser.urlencoded({ extended: false }))
 // parse application/json
@@ -24,7 +22,7 @@ app.use(session({
 );
 
 //routes
-app.use('/', router);
+app.use('/api', router);
 
 
 //server start
