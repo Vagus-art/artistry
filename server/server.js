@@ -10,7 +10,7 @@ const uuid = require('uuid');
 var sess;
 
 //middleware
-app.use(express.static('./build'));
+//app.use(express.static('./build'));
 // parse application/x-www-form-urlencoded
 app.use(bodyparser.urlencoded({ extended: false }))
 // parse application/json

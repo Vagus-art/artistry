@@ -4,13 +4,10 @@ const postModel = require('../models/postModel');
 const userModel = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 
-//check if session was started, pass as variable to every render please
-let check = ()=>(sess.nickname!=undefined);
-
-
 //get
 router.get('/search', async (req,res)=>{
   try{
+    res.set('Access-Control-Allow-Origin','*');
     sess = req.session;
     //search for partial string
     myregex = new RegExp(req.body.searchbar,"i");
@@ -23,7 +20,7 @@ router.get('/search', async (req,res)=>{
     }
   }
   catch(err){
-    console.log('there has been an error on the search route: ' + err);
+    res.send(err);
   }
 });
 router.get('/logout',(req,res)=>{
@@ -64,16 +61,7 @@ catch(error){
   console.log(error,'login');
 }
 });
-
-//dev api
-router.get('/api', async (req,res)=>{
-  try {const db = await postModel.find();
-  res.json(db);}
-  catch(err){
-    console.log(err);
-  }
-});
-router.post('/api', async (req,res)=>{
+router.post('/posts', async (req,res)=>{
   const post = new postModel({
     title:req.body.title,
     content:req.body.content,
@@ -82,6 +70,15 @@ router.post('/api', async (req,res)=>{
   });
   await post.save();
   res.send('done');
+});
+
+//dev api
+router.get('/api', async (req,res)=>{
+  try {const db = await postModel.find();
+  res.json(db);}
+  catch(err){
+    console.log(err);
+  }
 });
 router.get('/api/users',async (req,res)=>{
   const users = await userModel.find();
