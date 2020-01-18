@@ -15,7 +15,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case 'GET_POSTS':
-            return {...state, posts : action.payload}
+            return {...state, posts : action.payload.results}
         break;
         default:
         return state;
