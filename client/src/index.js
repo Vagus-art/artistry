@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import { promiseMiddleware } from './middleware';
 
 const initialState = {
     posts:null
@@ -21,7 +22,7 @@ const reducer = (state = initialState, action) => {
     }
 }
 
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(promiseMiddleware));
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 

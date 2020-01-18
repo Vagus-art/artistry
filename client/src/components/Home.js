@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 
 const mapStateToProps = state => ({
-    posts: state.posts    
+    posts: state.posts
 });
 
 const fetchposts = async ()=>{
@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const Home = (props) => {
     useEffect(()=>{
-        fetchposts().then(data=>props.getPosts(data))
+      props.getPosts(fetchposts());
     },[])
     return (
         <div>
