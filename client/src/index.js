@@ -8,7 +8,8 @@ import { Provider } from 'react-redux';
 import { promiseMiddleware } from './middleware';
 
 const initialState = {
-    posts:null
+    posts:null,
+    user:'guest'
 }
 
 const reducer = (state = initialState, action) => {
