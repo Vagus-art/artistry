@@ -1,15 +1,11 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
+import agent from '../agent';
 
 const mapStateToProps = state => ({
     posts: state.posts
 });
 
-const fetchposts = async ()=>{
-    const fetched = await fetch('http://localhost:3000/api/search');
-    const fetchedjson = await fetched.json();
-    return fetchedjson.results;
-}
 
 const mapDispatchToProps = (dispatch) => ({
     getPosts : (payload) => dispatch({type:'GET_POSTS', payload})
@@ -18,7 +14,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const Home = (props) => {
     useEffect(()=>{
-      props.getPosts(fetchposts());
+      props.getPosts(agent.fetchposts());
     },[])
     return (
         <div>
