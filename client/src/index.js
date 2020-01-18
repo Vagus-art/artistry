@@ -14,10 +14,8 @@ const reducer = (state = initialState, action) => {
     switch(action.type){
         case 'GET_POSTS':
             return {...state, posts : action.payload}
-        break;
         default:
         return state;
-        break;
     }
 }
 
