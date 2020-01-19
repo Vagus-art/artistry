@@ -1,3 +1,7 @@
+//this redux middleware checks if the payload is a promise,
+//if it's a promise, resolves it and assings the returned value to the action payload
+//so the actual fetched values are stored in the redux store and not an unresolved promise
+
 const promiseMiddleware = store => next => action => {
     if (isPromise(action.payload)) {
         action.payload.then(

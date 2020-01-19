@@ -2,19 +2,22 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import agent from '../agent';
 
+//get posts from redux
 const mapStateToProps = state => ({
     posts: state.posts
 });
 
-
+//set dispatch function to props
 const mapDispatchToProps = (dispatch) => ({
     getPosts : (payload) => dispatch({type:'GET_POSTS', payload})
 });
 
 
 const Home = (props) => {
+    const feedURI = '/search'
     useEffect(()=>{
-      props.getPosts(agent.fetchposts());
+      //fetch feed contents and dispatch them to redux store
+      props.getPosts(agent.fetchjson(feedURI));
     },[])
     return (
         <div>

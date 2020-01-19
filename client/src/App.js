@@ -7,6 +7,7 @@ import NavBar from './components/NavBar';
 import Home from './components/Home';
 import { connect } from 'react-redux';
 
+//get the user from store's state and set it to this component's props
 const mapStateToProps = state => ({
   user: state.user
 })
@@ -26,4 +27,7 @@ function App(props) {
   )
 }
 
+//connect function takes a mapstate and a mapdispatch
+//the first gets the store's state and maps it to props
+//the second sets a function to interact with the store (called dispatch)
 export default connect(mapStateToProps,()=>({}))(App);
