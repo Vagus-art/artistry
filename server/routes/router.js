@@ -79,7 +79,7 @@ router.post('/login',async (req,res)=>{
         const match = await bcrypt.compare(password,user.password);
         if(match){
         sess.nickname = nickname;
-        res.json({message:'Logged successfully'});
+        res.json({message:'success'});
         }
         else{
         res.json({message:"Password invalid!"});

@@ -30,19 +30,22 @@ const Login = (props)=>{
   }
 
   //form submit, sends userinfo to server, awaits a message response and a session cookie
-  const onSubmit = (e) => {
-    e.preventDefault();
-    agent.postJSON('/login',{user:userLogin,password:passwordLogin});
-    (agent.checksess()) ? props.loginSubmit(userLogin) : setMessage('error');
+  const onSubmit = async () => {
+    let response = await agent.postJSON('/login',{nickname:userLogin,password:passwordLogin});
+    response = response.message;
+    alert(response);
+    if(response=='success'){
+      //dispatch username to redux database, that makes the app component refresh and render the home component
+      props.loginSubmit(userLogin);
+    }
+    //(agent.checksess()) ? props.loginSubmit(userLogin) : setMessage('error');
   }
   return(
     <div id = 'login'>
-    <h1>{message}</h1>
-      <form onSubmit={onSubmit}>
+    <h1>Log in</h1>
         <input type='text' name='user' placeholder='user' value={userLogin} onChange={onChange} required/>
         <input type='password' name='password' placeholder='password' value={passwordLogin} onChange={onChange} required/>
-        <input type='submit' name='submit' value='Log in' />
-      </form>
+        <button onClick={onSubmit}>Log in</button>
     </div>
   )
 }

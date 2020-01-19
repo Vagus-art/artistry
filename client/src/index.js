@@ -19,9 +19,16 @@ const initialState = {
 //that contains data to save
 const reducer = (state = initialState, action) => {
     switch(action.type){
-      //add CHECK_LOG and LOGIN_SUBMIT !important
+      //CHECK_LOG still doesn't work properly since the data does not persist
         case 'GET_POSTS':
             return {...state, posts : action.payload.results}
+        break;
+        case 'LOGIN_SUBMIT':
+          return {...state, user : action.payload}
+        break;
+        case 'CHECK_LOG':
+          return {...state, logged : action.payload}
+        break;
         default:
         return state;
     }

@@ -24,7 +24,7 @@ function App(props) {
   useEffect(()=>{
     props.checkLog(agent.checksess());
   },[])
-    if (props.logged){
+    if (props.user!=='guest'){
       return(
       <div className="App">
       <Router>

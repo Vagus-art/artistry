@@ -3,7 +3,7 @@
 
 const ROOT_URI = '/api';
 
-//generic json request
+//generic json get
 const getJSON = async (uri)=>{
     const fetched = await fetch(ROOT_URI.concat(uri),{credentials:'include'});
     const fetchedjson = await fetched.json();
@@ -14,15 +14,19 @@ const getJSON = async (uri)=>{
 const postJSON = async (uri,payload)=>{
     try {
     const fetched = await fetch(ROOT_URI.concat(uri),{
-      method:'post',
-      body:payload
+      method:'POST',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      body:JSON.stringify(payload)
     });
     const fetchedjson = await fetched.json();
     return fetchedjson;
     }
     catch(err){
       console.log(err);
-    }    
+    }
 }
 
 //check if user is logged in
