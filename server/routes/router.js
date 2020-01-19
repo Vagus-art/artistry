@@ -1,17 +1,32 @@
 const express = require('express');
 const router = express.Router();
 const postModel = require('../models/postModel');
-const userModel = require('../models/userModel');
-const bcrypt = require('bcryptjs');
+//articles mongodb model
 
-//get
+const userModel = require('../models/userModel');
+//user mongodb model
+
+const bcrypt = require('bcryptjs');
+//hash encryption for submitted passwords
+
+//ROUTING
+
+//GET
+
+//route intended for search queryes, with partial strings
 router.get('/search', async (req,res)=>{
   try{
     res.set('Access-Control-Allow-Origin','*');
     sess = req.session;
+
     //search for partial string
-    myregex = new RegExp(req.body.searchbar,"i");
-    const result = await postModel.find({title:{ $regex: myregex }}).lean();
+    searchedQuery = new RegExp(req.body.searchbar,"i");
+    //string to regex
+
+    const result = await postModel.find({title:{ $regex: searchedQuery }}).lean();
+    //get posts from database, filtered by searchedQuery regex
+
+    //if results aren't found, return a message
     if(result.length!=0){
       res.json({results:result});
     }
@@ -19,16 +34,21 @@ router.get('/search', async (req,res)=>{
       res.json({message:'No results found for ' + req.body.searchbar});
     }
   }
+  //generic error handling
   catch(err){
     res.send(err);
   }
 });
+
+//logout route, kills current session
 router.get('/logout',(req,res)=>{
   req.session.destroy();
   res.send('User logged');
 })
 
-//post
+//POST
+
+//register route, posts user info to db and hashes password
 router.post('/signup',async (req,res)=>{
   const user = new userModel({
     nickname:req.body.nickname,
@@ -38,6 +58,8 @@ router.post('/signup',async (req,res)=>{
   await user.save();
   res.json({message:'Registered succesfully'});
 });
+
+//login route, compares hashed password and establishes a session, if values are invalid, returns error messages to client
 router.post('/login',async (req,res)=>{
   try{
     sess = req.session;
@@ -61,6 +83,8 @@ catch(error){
   console.log(error,'login');
 }
 });
+
+//route for article posting, authentication is needed, but not yet implemented
 router.post('/posts', async (req,res)=>{
   const post = new postModel({
     title:req.body.title,
@@ -72,7 +96,9 @@ router.post('/posts', async (req,res)=>{
   res.send('done');
 });
 
-//dev api
+//DEV API
+
+//get all posts
 router.get('/api', async (req,res)=>{
   try {const db = await postModel.find();
   res.json(db);}
@@ -80,6 +106,8 @@ router.get('/api', async (req,res)=>{
     console.log(err);
   }
 });
+
+//get all users data
 router.get('/api/users',async (req,res)=>{
   const users = await userModel.find();
   res.json(users);
