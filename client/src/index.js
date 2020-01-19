@@ -10,7 +10,8 @@ import { promiseMiddleware } from './middleware';
 //initial redux store state, before any request or action
 const initialState = {
     posts:null,
-    user:'guest'
+    user:'guest',
+    logged:false
 }
 
 //the store reducer, takes an action that has a type (string value) that defines what
@@ -18,6 +19,7 @@ const initialState = {
 //that contains data to save
 const reducer = (state = initialState, action) => {
     switch(action.type){
+      //add CHECK_LOG and LOGIN_SUBMIT !important
         case 'GET_POSTS':
             return {...state, posts : action.payload.results}
         default:

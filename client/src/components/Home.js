@@ -17,7 +17,7 @@ const Home = (props) => {
     const feedURI = '/search'
     useEffect(()=>{
       //fetch feed contents and dispatch them to redux store
-      props.getPosts(agent.fetchjson(feedURI));
+      props.getPosts(agent.getJSON(feedURI));
     },[])
     return (
         <div>

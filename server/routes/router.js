@@ -13,7 +13,7 @@ const bcrypt = require('bcryptjs');
 
 //GET
 
-//route intended for search queryes, with partial strings
+//route intended for search queries, with partial strings
 router.get('/search', async (req,res)=>{
   try{
     res.set('Access-Control-Allow-Origin','*');
@@ -39,6 +39,16 @@ router.get('/search', async (req,res)=>{
     res.send(err);
   }
 });
+
+//checks if user is logged in, sends a boolean to be checked on client
+router.get('/checksess', async (req,res)=>{
+  if (req.session){
+    res.send(true);
+  }
+  else {
+    res.send(false);
+  }
+})
 
 //logout route, kills current session
 router.get('/logout',(req,res)=>{
@@ -83,6 +93,8 @@ catch(error){
   console.log(error,'login');
 }
 });
+
+
 
 //route for article posting, authentication is needed, but not yet implemented
 router.post('/posts', async (req,res)=>{
