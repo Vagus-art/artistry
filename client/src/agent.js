@@ -80,6 +80,5 @@ const checksess = async ()=>{
 export default {
   getJSON,
   postJSON,
-  loginJSON,
-  checksess
+  loginJSON
 };
