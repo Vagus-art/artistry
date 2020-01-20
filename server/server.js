@@ -14,7 +14,6 @@ const database = require('./database.js');
 const port = process.env.PORT || 3000;
 //host PORT
 
-var sess;
 //global session variable
 
 //MIDDLEWARE
