@@ -11,7 +11,8 @@ import agent from './agent';
 
 //get the user from store's state and set it to this component's props
 const mapStateToProps = state => ({
-  token: state.token
+  token: state.token,
+  user: state.user
 });
 
 function App(props) {

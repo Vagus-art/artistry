@@ -6,12 +6,13 @@ import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { promiseMiddleware } from './middleware';
-import { loadToken } from './stateStorage';
+import { loadToken, decodeToken } from './stateStorage';
 
 //initial redux store state, before any request or action
 const initialState = {
     posts:null,
-    token : loadToken()
+    token : loadToken(),
+    user : decodeToken(loadToken())
 }
 
 //the store reducer, takes an action that has a type (string value) that defines what
@@ -19,7 +20,6 @@ const initialState = {
 //that contains data to save
 const reducer = (state = initialState, action) => {
     switch(action.type){
-      //CHECK_LOG still doesn't work properly since the data does not persist
         case 'GET_POSTS':
             return {...state, posts : action.payload}
         break;

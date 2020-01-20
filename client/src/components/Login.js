@@ -36,13 +36,9 @@ const Login = (props)=>{
     setMessage(response.error);
     let OKSTATUS = 200;
     if(response.status==OKSTATUS){
-      alert('success');
-      
       props.loginSubmit(response.token);
       //dispatch username to redux database, that makes the app component refresh and render the home component
-      //props.loginSubmit(response);
     }
-    //(agent.checksess()) ? props.loginSubmit(userLogin) : setMessage('error');
   }
   return(
     <div id = 'login'>

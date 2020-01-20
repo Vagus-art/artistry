@@ -1,4 +1,5 @@
 //load token from localstorage (user data)
+import jwt from 'jsonwebtoken';
 
 export const loadToken = () => {
     try{
@@ -10,6 +11,15 @@ export const loadToken = () => {
     }
     catch(err){
         return undefined;
+    }
+}
+
+export const decodeToken = (token) => {
+    if(token){
+        return jwt.decode(token);
+    }
+    else{
+        return null;
     }
 }
 
