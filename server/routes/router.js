@@ -43,18 +43,6 @@ router.get('/search', async (req,res)=>{
   }
 });
 
-//checks if user is logged in, sends a boolean to be checked on client
-router.get('/checksess', async (req,res)=>{
-
-  //CHANGE THIS TO JWT
-  if (req.session){
-    res.send(true);
-  }
-  else {
-    res.send(false);
-  }
-})
-
 //logout route, kills current session
 router.get('/logout',(req,res)=>{
 
@@ -77,9 +65,9 @@ router.post('/signup',async (req,res)=>{
 });
 
 //login route, compares hashed password and establishes a session, if values are invalid, returns error messages to client
+//on valid login sends a json web token to be stored in localstorage (client)
 router.post('/login',async (req,res)=>{
   try{
-    //CHANGE THIS TO JWT
     const [nickname,password] = [req.body.nickname,req.body.password];
     const user = await userModel.findOne({nickname:nickname});
     if(user){

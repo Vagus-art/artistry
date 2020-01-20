@@ -14,7 +14,7 @@ const Login = (props)=>{
   const [passwordLogin, setPasswordLogin] = useState('');
 
   //message for error notifications
-  const [message, setMessage] = useState('no message');
+  const [message, setMessage] = useState('');
 
   //state setters on input changes
   const onChange = (e) => {
@@ -33,7 +33,7 @@ const Login = (props)=>{
   const onSubmit = async () => {
     let response = await agent.loginJSON('/login',{nickname:userLogin,password:passwordLogin});
     if (response.hasOwnProperty('error'))
-    alert(response.error);
+    setMessage(response.error);
     let OKSTATUS = 200;
     if(response.status==OKSTATUS){
       alert('success');
@@ -47,6 +47,7 @@ const Login = (props)=>{
   return(
     <div id = 'login'>
     <h1>Log in</h1>
+  <h2>{message}</h2>
         <input type='text' name='user' placeholder='user' value={userLogin} onChange={onChange} required/>
         <input type='password' name='password' placeholder='password' value={passwordLogin} onChange={onChange} required/>
         <button onClick={onSubmit}>Log in</button>

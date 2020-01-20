@@ -44,10 +44,10 @@ const loginJSON = async (uri,payload)=>{
   });
 
   const fetchedjson = await fetched.json()
-  //add status to the new object with parsed json data
+  //add status code to the new object with parsed json data
   fetchedjson.status = fetched.status;
 
-  //persist user data in jwt token
+  //persist user data in local storage
   const token = fetchedjson.token;
   localStorage.setItem('token',token);
 
