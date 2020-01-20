@@ -3,6 +3,10 @@ const router = express.Router();
 const postModel = require('../models/postModel');
 //articles mongodb model
 
+const jwt = require('jsonwebtoken');
+const config = require('../config');
+//web token framework
+
 const userModel = require('../models/userModel');
 //user mongodb model
 
@@ -17,7 +21,6 @@ const bcrypt = require('bcryptjs');
 router.get('/search', async (req,res)=>{
   try{
     res.set('Access-Control-Allow-Origin','*');
-    sess = req.session;
 
     //search for partial string
     searchedQuery = new RegExp(req.body.searchbar,"i");
@@ -28,7 +31,7 @@ router.get('/search', async (req,res)=>{
 
     //if results aren't found, return a message
     if(result.length!=0){
-      res.json({results:result});
+      res.json(result);
     }
     else{
       res.json({message:'No results found for ' + req.body.searchbar});
@@ -42,6 +45,8 @@ router.get('/search', async (req,res)=>{
 
 //checks if user is logged in, sends a boolean to be checked on client
 router.get('/checksess', async (req,res)=>{
+
+  //CHANGE THIS TO JWT
   if (req.session){
     res.send(true);
   }
@@ -52,6 +57,8 @@ router.get('/checksess', async (req,res)=>{
 
 //logout route, kills current session
 router.get('/logout',(req,res)=>{
+
+  //CHANGE THIS TO JWT
   req.session.destroy();
   res.send('User logged');
 })
@@ -72,21 +79,25 @@ router.post('/signup',async (req,res)=>{
 //login route, compares hashed password and establishes a session, if values are invalid, returns error messages to client
 router.post('/login',async (req,res)=>{
   try{
-    sess = req.session;
+    //CHANGE THIS TO JWT
     const [nickname,password] = [req.body.nickname,req.body.password];
     const user = await userModel.findOne({nickname:nickname});
     if(user){
         const match = await bcrypt.compare(password,user.password);
         if(match){
-        sess.nickname = nickname;
-        res.json({message:'success'});
+        const token = jwt.sign({
+          id : user._id,
+          nickname : user.nickname,
+          email : user.email
+        }, config.jwtSecret)
+        res.status(200).json({token});
         }
         else{
-        res.json({message:"Password invalid!"});
+        res.status(401).json({error:"Password invalid!"});
         }
     }
     else{
-        res.json({message:'Nickname not found!'})
+        res.status(401).json({error:'Nickname not found!'})
     }
 }
 catch(error){

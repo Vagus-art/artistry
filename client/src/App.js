@@ -11,20 +11,11 @@ import agent from './agent';
 
 //get the user from store's state and set it to this component's props
 const mapStateToProps = state => ({
-  user: state.user,
-  logged: state.logged
+  token: state.token
 });
 
-//this dispatch fetches a boolean that defines if the app has a session
-const mapDispatchToProps = dispatch => ({
-  checkLog : (payload) => dispatch({type:'CHECK_LOG', payload})
-})
-
 function App(props) {
-  useEffect(()=>{
-    props.checkLog(agent.checksess());
-  },[])
-    if (props.user!=='guest'){
+    if (props.token!==undefined){
       return(
       <div className="App">
       <Router>
@@ -49,4 +40,4 @@ function App(props) {
 //connect function takes a mapstate and a mapdispatch
 //the first gets the store's state and maps it to props
 //the second sets a function to interact with the store (called dispatch)
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default connect(mapStateToProps,null)(App);

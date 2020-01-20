@@ -31,12 +31,16 @@ const Login = (props)=>{
 
   //form submit, sends userinfo to server, awaits a message response and a session cookie
   const onSubmit = async () => {
-    let response = await agent.postJSON('/login',{nickname:userLogin,password:passwordLogin});
-    response = response.message;
-    alert(response);
-    if(response=='success'){
+    let response = await agent.loginJSON('/login',{nickname:userLogin,password:passwordLogin});
+    if (response.hasOwnProperty('error'))
+    alert(response.error);
+    let OKSTATUS = 200;
+    if(response.status==OKSTATUS){
+      alert('success');
+      
+      props.loginSubmit(response.token);
       //dispatch username to redux database, that makes the app component refresh and render the home component
-      props.loginSubmit(userLogin);
+      //props.loginSubmit(response);
     }
     //(agent.checksess()) ? props.loginSubmit(userLogin) : setMessage('error');
   }

@@ -8,12 +8,6 @@ const router = require('./routes/router.js');
 const bodyparser = require('body-parser');
 //parse requests
 
-const session = require('express-session');
-//session handler
-
-const uuid = require('uuid');
-//random string generator
-
 const database = require('./database.js');
 //connection to mongodb
 
@@ -34,12 +28,6 @@ app.use(bodyparser.urlencoded({ extended: false }))
 app.use(bodyparser.json())
 //parse application/json
 
-
-app.use(session({
-    genid: ()=>uuid(),
-  secret: 'mysecret'})
-);
-//sessions
 
 //ROUTES
 
