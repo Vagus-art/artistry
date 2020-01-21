@@ -1,7 +1,7 @@
 //fetching router, exports fetching functions that use a root uri, so I don't have to copy paste
 //for each react component
 
-const ROOT_URI = '/api';
+export const ROOT_URI = '/api';
 
 //generic json get
 const getJSON = async (uri)=>{
@@ -43,6 +43,5 @@ const postJSON = async (uri,payload,token)=>{
 
 export default {
   getJSON,
-  postJSON,
-  ROOT_URI
+  postJSON
 };

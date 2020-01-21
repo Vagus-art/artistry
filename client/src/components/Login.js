@@ -25,7 +25,8 @@ const Login = (props)=>{
   }
 
   //form submit, sends userinfo to server, awaits a message response and a session cookie
-  const onSubmit = async () => {
+  const onSubmit = async (e) => {
+    e.preventDefault();
     let response = await auth.loginJSON('/login',{nickname:userLogin,password:passwordLogin});
     if (response.hasOwnProperty('error'))
     setMessage(response.error);
@@ -33,10 +34,12 @@ const Login = (props)=>{
   return(
     <div id = 'login'>
     <h1>Log in</h1>
-  <h2>{message}</h2>
-        <input type='text' name='user' placeholder='user' value={userLogin} onChange={onChange} required/>
-        <input type='password' name='password' placeholder='password' value={passwordLogin} onChange={onChange} required/>
-        <button onClick={onSubmit}>Log in</button>
+    <h2>{message}</h2>
+    <form onSubmit={onSubmit}>
+      <input type='text' name='user' placeholder='user' value={userLogin} onChange={onChange} required/>
+      <input type='password' name='password' placeholder='password' value={passwordLogin} onChange={onChange} required/>
+      <input type='submit' value='Log in' />
+    </form>
     </div>
   )
 }

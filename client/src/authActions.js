@@ -1,8 +1,6 @@
-import agent from './agent';
+import {ROOT_URI} from './agent';
 import {store} from './index';
 import { decodeToken } from './stateStorage';
-
-const ROOT_URI = agent.ROOT_URI;
 
 //login
 const loginJSON = async (uri,payload)=>{
