@@ -16,7 +16,7 @@ const loginJSON = async (uri,payload)=>{
 
         });
 
-        //makes a new object with json body and response status.
+        //makes fetched body accesible.
         const response = await fetched.json()
      
         //persist user data in local storage
