@@ -43,14 +43,6 @@ router.get('/search', async (req,res)=>{
   }
 });
 
-//logout route, kills current session
-router.get('/logout',(req,res)=>{
-
-  //CHANGE THIS TO JWT
-  req.session.destroy();
-  res.send('User logged');
-})
-
 //POST
 
 //register route, posts user info to db and hashes password
