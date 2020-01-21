@@ -31,31 +31,33 @@ export default function NavBar() {
             <div className="SideMenu onsmall" ref={sidemenu}>
                 <ul className="NavBarMenu column">
                     <Link to="/">
-                    <li onClick={sidemenutrigger}>Home</li>                       
+                        <li onClick={sidemenutrigger}>Home</li>                       
                     </Link>
                     <Link to="/profile">
-                    <li onClick={sidemenutrigger}>Profile</li>
+                        <li onClick={sidemenutrigger}>Profile</li>
                     </Link>
                     <Link to="/settings">
-                    <li onClick={sidemenutrigger}>Settings</li>
+                        <li onClick={sidemenutrigger}>Settings</li>
                     </Link>
-                    <Link>
-                    <li onClick={()=>{auth.logout();sidemenutrigger()}}>Logout</li>
+                    <Link to="/">
+                        <li onClick={()=>{auth.logout();sidemenutrigger()}}>Logout</li>
                     </Link>
                 </ul>
             </div>
             <div className="NavBar">
                 <ul className="NavBarMenu">
                     <Link to="/">
-                    <li className="onbig">Home</li>
+                        <li className="onbig">Home</li>
                     </Link>
                     <Link to="/profile">
-                    <li className="onbig">Profile</li>
+                        <li className="onbig">Profile</li>
                     </Link>
                     <Link to="/settings">
-                    <li className="onbig">Settings</li>
+                        <li className="onbig">Settings</li>
                     </Link>
-                    <li className="onbig" onClick={auth.logout}>Logout</li>
+                    <Link to="/">
+                        <li className="onbig" onClick={auth.logout}>Logout</li>
+                    </Link>
                     <li className="onsmall" onClick={sidemenutrigger}>Menu</li>
                 </ul>
             </div>
