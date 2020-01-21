@@ -15,3 +15,6 @@
  ### Usage (dev):
  - Start server first `cd server && npm start or npm run dev` **default port is 4000**
  - Then start react app `cd client && npm start`
+
+ ### Usage (heroku hosted)
+ - Temporary user, `nickname: admin  |  password: password`

@@ -18,7 +18,7 @@ const port = process.env.PORT || 4000;
 
 //MIDDLEWARE
 
-//app.use(express.static('./build'));
+app.use('/',express.static('../client/build'));
 //serve compiled react static page
 
 app.use(bodyparser.urlencoded({ extended: false }))

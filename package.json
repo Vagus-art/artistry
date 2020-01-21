@@ -1,0 +1,21 @@
+{
+  "name": "artistry",
+  "version": "1.0.0",
+  "description": "- overall app structure and ui.\r  - jest testing and ESlint usage.\r  - client form validation.\r  - client style and animations.\r  - code tyding-up, modularizing.\r  - multipart/form request handling.\r  - registration form.\r  - posts form.\r  - profile modification form and server side.\r  - websocket integration for live feed refresh.",
+  "main": "",
+  "scripts": {
+    "build": "cd client && npm install && npm run build && cd .. && cd server && npm install && cd ..",
+    "start": "cd server && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vagus-art/artistry.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vagus-art/artistry/issues"
+  },
+  "homepage": "https://github.com/Vagus-art/artistry#readme"
+}
