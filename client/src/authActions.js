@@ -43,6 +43,7 @@ const loginJSON = async (uri,payload)=>{
 const logout = () =>{
     localStorage.removeItem('token');
     store.dispatch({type:'LOGOUT'});
+    window.location.href="/";
     window.location.reload();
 }
 
