@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './css/NavBar.css';
+import auth from '../authActions';
 import {Link} from 'react-router-dom';
 
 export default function NavBar() {   
@@ -51,6 +52,7 @@ export default function NavBar() {
                     <Link to="/settings">
                     <li className="onbig">Settings</li>
                     </Link>
+                    <li className="onbig" onClick={auth.logout}>Logout</li>
                     <li className="onsmall" onClick={sidemenutrigger}>Menu</li>
                 </ul>
             </div>

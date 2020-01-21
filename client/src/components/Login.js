@@ -1,11 +1,6 @@
 import React,{useState} from 'react';
 import {connect} from 'react-redux';
-import agent from '../agent';
-
-//submits username to redux
-const mapDispatchToProps = (dispatch) => ({
-  loginSubmit : (payload) => dispatch({type:'LOGIN_SUBMIT',payload})
-})
+import auth from '../authActions';
 
 const Login = (props)=>{
 
@@ -31,14 +26,9 @@ const Login = (props)=>{
 
   //form submit, sends userinfo to server, awaits a message response and a session cookie
   const onSubmit = async () => {
-    let response = await agent.loginJSON('/login',{nickname:userLogin,password:passwordLogin});
+    let response = await auth.loginJSON('/login',{nickname:userLogin,password:passwordLogin});
     if (response.hasOwnProperty('error'))
     setMessage(response.error);
-    let OKSTATUS = 200;
-    if(response.status==OKSTATUS){
-      props.loginSubmit(response.token);
-      //dispatch username to redux database, that makes the app component refresh and render the home component
-    }
   }
   return(
     <div id = 'login'>
@@ -52,4 +42,4 @@ const Login = (props)=>{
 }
 
 //this time I don't have any state to get from the store
-export default connect(()=>({}),mapDispatchToProps)(Login);
+export default Login;

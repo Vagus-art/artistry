@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { promiseMiddleware } from './middleware';
 import { loadToken, decodeToken } from './stateStorage';
@@ -24,7 +24,13 @@ const reducer = (state = initialState, action) => {
             return {...state, posts : action.payload}
         break;
         case 'LOGIN_SUBMIT':
-          return {...state, token : action.payload}
+            return {...state, token : action.payload}
+        break;
+        case 'SET_USER':
+            return {...state, user: action.payload}
+        break;
+        case 'LOGOUT':
+            return {...state, token:null, user:null}
         break;
         default:
         return state;
@@ -33,7 +39,8 @@ const reducer = (state = initialState, action) => {
 
 //applyMiddleware function is needed, so actions go through that function before they enter
 //the reducer's logic
-const store = createStore(reducer, applyMiddleware(promiseMiddleware));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const store = createStore(reducer, composeEnhancers(applyMiddleware(promiseMiddleware)));
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
