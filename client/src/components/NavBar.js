@@ -39,7 +39,7 @@ export default function NavBar() {
                     <Link to="/settings">
                         <li onClick={sidemenutrigger}>Settings</li>
                     </Link>
-                    <Link to="/">
+                    <Link>
                         <li onClick={()=>{auth.logout();sidemenutrigger()}}>Logout</li>
                     </Link>
                 </ul>
@@ -55,7 +55,7 @@ export default function NavBar() {
                     <Link to="/settings">
                         <li className="onbig">Settings</li>
                     </Link>
-                    <Link to="/">
+                    <Link>
                         <li className="onbig" onClick={auth.logout}>Logout</li>
                     </Link>
                     <li className="onsmall" onClick={sidemenutrigger}>Menu</li>
