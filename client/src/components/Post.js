@@ -11,7 +11,8 @@ const Post = (props) => {
   const [postContent,setPostContent] = useState("");
   const onSubmit = (e) => {
     e.preventDefault();
-    agent.postJSON('/posts',{title:props.user.nickname,content:postContent},props.token) // i was working here
+    let reloj = new Date();
+    agent.postJSON('/posts',{nickname:props.user.nickname,content:postContent},props.token) // I need to require token validation next
   }
   return(
     <div className="post">

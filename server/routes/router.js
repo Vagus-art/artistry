@@ -26,7 +26,8 @@ router.get('/search', async (req,res)=>{
     searchedQuery = new RegExp(req.body.searchbar,"i");
     //string to regex
 
-    const result = await postModel.find({title:{ $regex: searchedQuery }}).lean();
+    //const result = await postModel.find({nickname:{ $regex: searchedQuery }}).lean();
+    const result = await postModel.find().lean();
     //get posts from database, filtered by searchedQuery regex
 
     //if results aren't found, return a message
@@ -104,11 +105,12 @@ catch(error){
 
 //route for article posting, authentication is needed, but not yet implemented
 router.post('/posts', async (req,res)=>{
+  const now = new Date();
   const post = new postModel({
-    title:req.body.title,
+    nickname:req.body.nickname,
     content:req.body.content,
     tags:req.body.tags,
-    date:req.body.date
+    date:now.toLocaleDateString()
   });
   await post.save();
   res.send('done');
@@ -117,9 +119,12 @@ router.post('/posts', async (req,res)=>{
 //DEV API
 
 //get all posts
-router.get('/api', async (req,res)=>{
-  try {const db = await postModel.find();
-  res.json(db);}
+router.get('/', async (req,res)=>{
+  try {
+  const result = await postModel.find().lean();
+  res.set('Access-Control-Allow-Origin','*');
+  res.json(result);
+  }
   catch(err){
     console.log(err);
   }

@@ -14,19 +14,20 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 const Home = (props) => {
-    const feedURI = '/search'
+    const feedURI = '/'
     useEffect(()=>{
       //fetch feed contents and dispatch them to redux store
       props.getPosts(agent.getJSON(feedURI));
     },[])
     return (
         <div>
-            <h1>Home</h1>
-            {   props.posts ? (props.posts.map(post=>{
+            <h1 style={{textAlign:'center'}}>Home</h1>
+            {   props.posts.length>0 ? (props.posts.map(post=>{
                     return(
-                        <div>
-                            <h1>{post.title}</h1>
+                        <div className="postito">
+                            <a>{post.nickname}</a>
                             <p>{post.content}</p>
+                            <p>{post.date}</p>
                         </div>
                     )
                 })) : (<h1>Loading</h1>)

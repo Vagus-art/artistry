@@ -7,10 +7,11 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { promiseMiddleware } from './middleware';
 import { loadToken, decodeToken } from './stateStorage';
+import agent from './agent';
 
 //initial redux store state, before any request or action
 const initialState = {
-    posts:null,
+    posts: agent.getJSON('/'),
     token : loadToken(),
     user : decodeToken(loadToken())
 }

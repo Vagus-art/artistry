@@ -10,6 +10,12 @@ body {
   margin:0;
   padding:0;
 }
+.postito{
+  margin:5px;
+  border:solid 1px black;
+  width:inherit;
+  padding: 5px;
+}
 .post-btn{
   position:fixed;
   bottom:30px;

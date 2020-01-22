@@ -5,7 +5,7 @@ export const ROOT_URI = '/api';
 
 //generic json get
 const getJSON = async (uri)=>{
-    const fetched = await fetch(ROOT_URI.concat(uri),{credentials:'include'});
+    const fetched = await fetch(ROOT_URI.concat(uri)/*,{credentials:'include'}*/);
     const fetchedjson = await fetched.json();
     return fetchedjson;
 }
