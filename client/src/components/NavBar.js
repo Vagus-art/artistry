@@ -1,19 +1,24 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './css/NavBar.css';
 import auth from '../authActions';
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-export default function NavBar() {   
+const mapStateToProps = state => ({
+  user: state.user
+})
+
+const NavBar = (props) => {
     //added hooks to make functional component behave like a class one
     var sidemenu = useRef(null);
-    var overlay = useRef(null);  
+    var overlay = useRef(null);
     const [sidemenutriggered,trigger] = useState(false);
     const sidemenutrigger = () =>{
         trigger(!sidemenutriggered);
     }
-    useEffect(()=>{   
+    useEffect(()=>{
         //imperative animations using sidemenutriggered state
-        [sidemenu, overlay] = [sidemenu.current.style, overlay.current.style];       
+        [sidemenu, overlay] = [sidemenu.current.style, overlay.current.style];
         if(sidemenutriggered){
             sidemenu.left = '0px';
             overlay.opacity = '0.8';
@@ -26,12 +31,12 @@ export default function NavBar() {
         }
     })
     return (
-        <>  
-            <div className="Overlay onsmall" ref={overlay} onClick={sidemenutrigger}></div>
-            <div className="SideMenu onsmall" ref={sidemenu}>
+        <>
+            <div className="Overlay" ref={overlay} onClick={sidemenutrigger}></div>
+            <div className="SideMenu" ref={sidemenu}>
                 <ul className="NavBarMenu column">
                     <Link to="/">
-                        <li onClick={sidemenutrigger}>Home</li>                       
+                        <li onClick={sidemenutrigger}>Home</li>
                     </Link>
                     <Link to="/profile">
                         <li onClick={sidemenutrigger}>Profile</li>
@@ -46,21 +51,32 @@ export default function NavBar() {
             </div>
             <div className="NavBar">
                 <ul className="NavBarMenu">
-                    <Link to="/">
-                        <li className="onbig">Home</li>
-                    </Link>
-                    <Link to="/profile">
-                        <li className="onbig">Profile</li>
-                    </Link>
-                    <Link to="/settings">
-                        <li className="onbig">Settings</li>
-                    </Link>
-                    <Link>
-                        <li className="onbig" onClick={auth.logout}>Logout</li>
-                    </Link>
-                    <li className="onsmall" onClick={sidemenutrigger}>Menu</li>
+                    {!props.user &&
+                      <Link to="/">
+                        <li>H</li>
+                      </Link>
+                    }
+                    {props.user &&
+                      <Link>
+                        <li onClick={sidemenutrigger}>H</li>
+                      </Link>
+                    }
+                    <li className="searchli"><input type="text" className="searchinput" name="searchbar" placeholder="search" /></li>
+                    { props.user && <Link to="/settings"><li>Settings</li></Link> }
                 </ul>
+                { !props.user &&
+                <ul className="NavBarMenu">
+                    <Link to="/login">
+                        <li>Log in</li>
+                    </Link>
+                    <Link to="/signup">
+                        <li>Sign up</li>
+                    </Link>
+                </ul>
+              }
             </div>
         </>
     )
 }
+
+export default connect(mapStateToProps,null)(NavBar);

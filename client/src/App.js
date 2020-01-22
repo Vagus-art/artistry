@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Profile from './components/Profile';
 import Settings from './components/Settings';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
 import Login from './components/Login';
+import Post from './components/Post';
+import Signup from './components/Signup';
 import { connect } from 'react-redux';
 import agent from './agent';
 
@@ -16,26 +18,28 @@ const mapStateToProps = state => ({
 });
 
 function App(props) {
-    if (props.token!==undefined){
       return(
       <div className="App">
       <Router>
             <NavBar />
             <Switch>
               <Route exact path='/' component={Home} />
+              { props.user && <>
               <Route path='/profile' render={()=><Profile user={props.user} />} />
               <Route path='/settings' component={Settings} />
+              <Route path='/post' component={Post} />
+              </>
+              }
+              { !props.user && <>
+              <Route path='/login' component={Login} />
+              <Route path='/signup' component={Signup} />
+              </>
+              }
             </Switch>
+          { props.user && <Link to="/post"><button className="post-btn">+</button></Link>}
         </Router>
         </div>
-    )}
-      else {
-        return(
-          <div className="App">
-          <Login/>
-          </div>
-        )
-      }
+    )
 }
 
 //connect function takes a mapstate and a mapdispatch

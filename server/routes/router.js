@@ -47,13 +47,28 @@ router.get('/search', async (req,res)=>{
 
 //register route, posts user info to db and hashes password
 router.post('/signup',async (req,res)=>{
-  const user = new userModel({
-    nickname:req.body.nickname,
-    password:await bcrypt.hash(req.body.password,10),
-    email:req.body.email
-  });
-  await user.save();
-  res.json({message:'Registered succesfully'});
+  try{
+      const [nickname,email] = [req.body.nickname,req.body.email];
+      const usercheck = await userModel.findOne({$or:[
+       {nickname:nickname}, {email:email}
+     ]});
+     //checkeando si el usuario existe, voy a mandar mensajes desde el servidor
+      if (!usercheck) {
+      const user = new userModel({
+        nickname:req.body.nickname,
+        password:await bcrypt.hash(req.body.password,10),
+        email:req.body.email
+      });
+      await user.save();
+      res.status(200).json({message:'Registered succesfully'});
+    }
+    else {
+      res.status(401).json({error:'Nickname already exists'});
+    }
+    }
+    catch(err){
+      res.status(401).json({error:'An error happened on registration, try again later...'});
+    }
 });
 
 //login route, compares hashed password and establishes a session, if values are invalid, returns error messages to client

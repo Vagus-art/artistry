@@ -10,6 +10,22 @@ body {
   margin:0;
   padding:0;
 }
+.post-btn{
+  position:fixed;
+  bottom:30px;
+  right: 30px;
+  width:50px;
+  border-radius: 50%;
+  border:none;
+  background-color: #263238;
+  color:white;
+  font-size: 2em;
+  text-align: center;
+  height:50px;
+}
+.post-btn:hover{
+  cursor:pointer;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

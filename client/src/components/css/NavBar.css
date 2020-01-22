@@ -1,7 +1,6 @@
 .NavBar{
     position:sticky;
     z-index: 10;
-    top:0;
     width:100%;
     background-color: #263238;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -40,6 +39,7 @@
     color:white;
     list-style: none;
     display:flex;
+    justify-content: center;
     flex-direction: row;
     width:inherit;
 }
@@ -47,8 +47,9 @@
     font-family: 'Press Start 2P', cursive;
     padding:15px;
     padding-inline:15px;
-    padding-block:18px;  
+    padding-block:18px;
 }
+
 .NavBarMenu li:hover{
     background-color: #000a12;
     cursor:pointer;
@@ -58,4 +59,22 @@
     text-decoration: none;
     font-size: 1em;
     font-weight: 100;
+}
+
+.searchli {
+    padding:0px !important;
+    display:flex;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+.searchinput {
+    padding:5px;
+    flex-grow: 1;
+}
+.searchli:hover {
+    background-color: #263238 !important;
+    cursor: default !important;
 }
