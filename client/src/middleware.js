@@ -3,27 +3,25 @@
 //so the actual fetched values are stored in the redux store and not an unresolved promise
 
 const promiseMiddleware = store => next => action => {
-    if (isPromise(action.payload)) {
-        action.payload.then(
-            res=> {
-                action.payload = res;
-                store.dispatch(action);
-            },
-            error => {
-                action.error = true;
-                action.payload = error;
-                store.dispatch(action);
-            }
-        );
-        return;
-    }
-    next(action);
+  if (isPromise(action.payload)) {
+    action.payload.then(
+      res => {
+        action.payload = res;
+        store.dispatch(action);
+      },
+      error => {
+        action.error = true;
+        action.payload = error;
+        store.dispatch(action);
+      }
+    );
+    return;
+  }
+  next(action);
 };
 
 function isPromise(v) {
-    return v && typeof v.then === 'function';
+  return v && typeof v.then === "function";
 }
 
-export {
-    promiseMiddleware
-};
+export { promiseMiddleware };

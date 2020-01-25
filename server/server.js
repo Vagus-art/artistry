@@ -1,14 +1,14 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 //backend framework
 
-const router = require('./routes/router.js');
+const router = require("./routes/router.js");
 //routing
 
-const bodyparser = require('body-parser');
+const bodyparser = require("body-parser");
 //parse requests
 
-const database = require('./database.js');
+const database = require("./database.js");
 //connection to mongodb
 
 const port = process.env.PORT || 4000;
@@ -18,21 +18,19 @@ const port = process.env.PORT || 4000;
 
 //MIDDLEWARE
 
-app.use('/',express.static('../client/build'));
+app.use("/", express.static("../client/build"));
 //serve compiled react static page
 
-app.use(bodyparser.urlencoded({ extended: false }))
+app.use(bodyparser.urlencoded({ extended: false }));
 //parse application/x-www-form-urlencoded
 
-app.use(bodyparser.json())
+app.use(bodyparser.json());
 //parse application/json
-
 
 //ROUTES
 
-app.use('/api', router);
+app.use("/api", router);
 //main REST API router
 
-
 //server start
-app.listen(port,()=>console.log(`Server listening on port ${port}`))
+app.listen(port, () => console.log(`Server listening on port ${port}`));

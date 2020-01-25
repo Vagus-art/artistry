@@ -28,7 +28,6 @@ const loginJSON = async (uri,payload)=>{
             const user = decodeToken(token);
             store.dispatch({type:'SET_USER',payload:user})
             store.dispatch({type:'LOGIN_SUBMIT',payload:token});
-            window.location.href="/";
         }
 
         //returns a new object with body || error and status
@@ -77,7 +76,6 @@ const signupJSON = async (uri,payload)=>{
 const logout = () =>{
     localStorage.removeItem('token');
     store.dispatch({type:'LOGOUT'});
-    window.location.href="/";
 }
 
 export default {

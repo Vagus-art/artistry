@@ -1,12 +1,12 @@
-@media (max-width:800px) {
-  .onbig{
-    display:none !important;
+@media (max-width: 800px) {
+  .onbig {
+    display: none !important;
     visibility: hidden;
   }
 }
-@media (min-width:800px) {
-  .onsmall{
-    display:none !important;
+@media (min-width: 800px) {
+  .onsmall {
+    display: none !important;
     visibility: hidden;
   }
 }
