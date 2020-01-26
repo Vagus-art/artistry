@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Profile from "./components/Profile";
@@ -9,7 +9,6 @@ import Login from "./components/Login";
 import Post from "./components/Post";
 import Signup from "./components/Signup";
 import { connect } from "react-redux";
-import agent from "./agent";
 
 //get the user from store's state and set it to this component's props
 const mapStateToProps = state => ({

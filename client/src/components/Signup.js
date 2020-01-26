@@ -23,6 +23,9 @@ const Signup = props => {
       case "email":
         setEmail(e.target.value);
         break;
+      default:
+        //do nothing
+        break;
     }
     console.log(user, password, email);
   };

@@ -19,6 +19,9 @@ const Login = props => {
       case "password":
         setPasswordLogin(e.target.value);
         break;
+      default:
+        //do nothing
+        break;
     }
     console.log(userLogin, passwordLogin);
   };

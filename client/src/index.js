@@ -22,17 +22,14 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_POSTS":
-      return { ...state, posts: action.payload };
-      break;
+      //reverse is to get posts ordered by newest
+      return { ...state, posts: action.payload.reverse() };
     case "LOGIN_SUBMIT":
       return { ...state, token: action.payload };
-      break;
     case "SET_USER":
       return { ...state, user: action.payload };
-      break;
     case "LOGOUT":
       return { ...state, token: null, user: null };
-      break;
     default:
       return state;
   }
