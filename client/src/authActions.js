@@ -94,19 +94,15 @@ const updateUser = async (uri,token,user) => {
   const responsejson = await response.json();
   console.log(response,responsejson);
   console.log('token:',token);
-  if (response.status==OKSTATUS){
-    try{
+  if (response.status===OKSTATUS){
       const newToken = responsejson.token;
       localStorage.setItem('token',newToken);
       const newUser = decodeToken(newToken);
       store.dispatch({type:'SET_USER',payload:newUser});
       store.dispatch({type:'LOGIN_SUBMIT',payload:newToken});
     }
-    catch(err){
-      console.log('error on client side', err);
-    }
   }
-}
+
 
 export default {
     loginJSON,
