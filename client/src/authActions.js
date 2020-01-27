@@ -2,6 +2,8 @@ import {ROOT_URI} from './agent';
 import {store} from './index';
 import { decodeToken } from './stateStorage';
 
+const OKSTATUS = 200;
+
 //login
 const loginJSON = async (uri,payload)=>{
     try {
@@ -21,12 +23,11 @@ const loginJSON = async (uri,payload)=>{
 
         //persist user data in local storage
         //dispatch user data, so reload isn't necessary
-        let OKSTATUS = 200;
         if(fetched.status===OKSTATUS){
             const token = response.token;
             localStorage.setItem('token',token);
             const user = decodeToken(token);
-            store.dispatch({type:'SET_USER',payload:user})
+            store.dispatch({type:'SET_USER',payload:user});
             store.dispatch({type:'LOGIN_SUBMIT',payload:token});
         }
 
@@ -78,8 +79,38 @@ const logout = () =>{
     store.dispatch({type:'LOGOUT'});
 }
 
+
+//FIX THIS, IT WORKS BUT IT'S UGLY
+
+const updateUser = async (uri,token,user) => {
+  const response = await fetch(ROOT_URI+uri,{
+    method:'PUT',
+    headers:{
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body:JSON.stringify({token,user})
+  });
+  const responsejson = await response.json();
+  console.log(response,responsejson);
+  console.log('token:',token);
+  if (response.status==OKSTATUS){
+    try{
+      const newToken = responsejson.token;
+      localStorage.setItem('token',newToken);
+      const newUser = decodeToken(newToken);
+      store.dispatch({type:'SET_USER',payload:newUser});
+      store.dispatch({type:'LOGIN_SUBMIT',payload:newToken});
+    }
+    catch(err){
+      console.log('error on client side', err);
+    }
+  }
+}
+
 export default {
     loginJSON,
     logout,
-    signupJSON
+    signupJSON,
+    updateUser
 }

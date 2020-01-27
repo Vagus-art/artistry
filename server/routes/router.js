@@ -83,7 +83,8 @@ router.post("/login", async (req, res) => {
           {
             id: user._id,
             nickname: user.nickname,
-            email: user.email
+            email: user.email,
+            profileimg: user.profileimg
           },
           config.jwtSecret
         );
@@ -115,6 +116,37 @@ router.post("/posts", async (req, res) => {
     res.json({ error: "there has been an error when posting... " + err });
   }
 });
+
+//PUT
+
+//FIX THIS, IT WORKS BUT IT'S UGLY
+router.put("/profileedit", async (req, res) => {
+    const tokenUser = await jwt.decode(req.body.token);
+    /*
+    console.log(req.body);
+    console.log(req.body.token);
+    console.log(tokenUser);*/
+    console.log(tokenUser);
+    const {id,nickname,email} = tokenUser;
+    const profileimg = req.body.user.profileimg;
+    userModel.update(
+      { _id: tokenUser._id },
+      { profileimg: req.body.user.profileimg }
+    );
+    console.log(req.body.user.profileimg);
+
+    const user = await userModel.findOne({ nickname: tokenUser.nickname });
+
+    const newToken = jwt.sign(
+      {
+        id,nickname,email,profileimg
+      },
+      config.jwtSecret
+    );
+
+    res.status(200).json({ message: "done", token: newToken });
+  }
+);
 
 //DEV API
 
