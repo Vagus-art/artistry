@@ -129,10 +129,10 @@ router.put("/profileedit", async (req, res) => {
     console.log(tokenUser);
     const {id,nickname,email} = tokenUser;
     const profileimg = req.body.user.profileimg;
-    userModel.update(
-      { _id: tokenUser._id },
+    await userModel.findOneAndUpdate(
+      { nickname: tokenUser.nickname },
       { profileimg: req.body.user.profileimg }
-    );
+    , {upsert:true});
     console.log(req.body.user.profileimg);
 
     const user = await userModel.findOne({ nickname: tokenUser.nickname });
