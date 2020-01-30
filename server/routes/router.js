@@ -81,10 +81,7 @@ router.post("/login", async (req, res) => {
       if (match) {
         const token = jwt.sign(
           {
-            id: user._id,
-            nickname: user.nickname,
-            email: user.email,
-            profileimg: user.profileimg
+            id: user._id
           },
           config.jwtSecret
         );
@@ -147,6 +144,18 @@ router.put("/profileedit", async (req, res) => {
     res.status(200).json({ message: "done", token: newToken });
   }
 );
+
+//Get specific user
+router.get('/user',async (req,res)=>{
+  const user = await userModel.findOne({_id:req.query.id});
+  if(user){
+    const {nickname, profileimg, email} = user;
+    res.status(200).json({nickname, profileimg, email});
+  }
+  else{
+    res.status(404).json({error:"user not found"});
+  }
+})
 
 //DEV API
 

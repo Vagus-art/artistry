@@ -5,15 +5,17 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
+import auth from './authActions';
 import { promiseMiddleware } from "./middleware";
 import { loadToken, decodeToken } from "./stateStorage";
 import agent from "./agent";
 
 //initial redux store state, before any request or action
+const token = loadToken();
 const initialState = {
   posts: agent.getJSON("/"),
-  token: loadToken(),
-  user: decodeToken(loadToken())
+  token,
+  user:null
 };
 
 //the store reducer, takes an action that has a type (string value) that defines what
@@ -42,6 +44,10 @@ export const store = createStore(
   reducer,
   composeEnhancers(applyMiddleware(promiseMiddleware))
 );
+
+if(token){
+  auth.setUser(token);
+}
 
 ReactDOM.render(
   <Provider store={store}>

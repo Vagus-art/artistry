@@ -4,7 +4,7 @@
 export const ROOT_URI = "/api";
 
 //generic json get
-const getJSON = async uri => {
+export const getJSON = async uri => {
   const fetched = await fetch(
     ROOT_URI.concat(uri) /*,{credentials:'include'}*/
   );
@@ -59,8 +59,14 @@ const imgurUpload = async (file) => {
     return responseimgjson.data.link;
 }
 
+export const getUser = id => { 
+  const user = getJSON("/user?id=".concat(id));
+  return user;
+};
+
 export default {
   getJSON,
   postJSON,
-  imgurUpload
+  imgurUpload,
+  getUser
 };

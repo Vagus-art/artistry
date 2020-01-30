@@ -7,10 +7,9 @@
  - client style and animations.
  - code tyding-up, modularizing.
  - multipart/form request handling.
- - registration form.
- - posts form.
  - profile modification form and server side.
  - websocket integration for live feed refresh.
+ - loading state for profile picture uploading.
 
  ### Usage (dev):
  - Start server first `cd server && npm start or npm run dev` **default port is 4000**
