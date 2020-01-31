@@ -1,4 +1,4 @@
-import { ROOT_URI, getUser } from "./agent";
+import { ROOT_URI, getUser, postJSON } from "./agent";
 import { store } from "./index";
 import { decodeToken } from "./stateStorage";
 
@@ -94,13 +94,9 @@ const updateUser = async (uri, token, user) => {
   });
   const responsejson = await response.json();
   console.log(response, responsejson);
-  console.log("token:", token);
   if (response.status === OKSTATUS) {
-    const newToken = responsejson.token;
-    localStorage.setItem("token", newToken);
-    const newUser = decodeToken(newToken);
+    const newUser = responsejson.user;
     store.dispatch({ type: "SET_USER", payload: newUser });
-    store.dispatch({ type: "LOGIN_SUBMIT", payload: newToken });
   }
 };
 

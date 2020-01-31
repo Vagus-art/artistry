@@ -119,29 +119,15 @@ router.post("/posts", async (req, res) => {
 //FIX THIS, IT WORKS BUT IT'S UGLY
 router.put("/profileedit", async (req, res) => {
     const tokenUser = await jwt.decode(req.body.token);
-    /*
-    console.log(req.body);
-    console.log(req.body.token);
-    console.log(tokenUser);*/
-    console.log(tokenUser);
-    const {id,nickname,email} = tokenUser;
     const profileimg = req.body.user.profileimg;
     await userModel.findOneAndUpdate(
-      { nickname: tokenUser.nickname },
+      { _id: tokenUser.id },
       { profileimg: req.body.user.profileimg }
     , {upsert:true});
-    console.log(req.body.user.profileimg);
 
-    const user = await userModel.findOne({ nickname: tokenUser.nickname });
+    const user = await userModel.findOne({ _id: tokenUser.id });
 
-    const newToken = jwt.sign(
-      {
-        id,nickname,email,profileimg
-      },
-      config.jwtSecret
-    );
-
-    res.status(200).json({ message: "done", token: newToken });
+    res.status(200).json({ message: "done", user });
   }
 );
 

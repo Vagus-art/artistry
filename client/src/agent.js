@@ -13,7 +13,7 @@ export const getJSON = async uri => {
 };
 
 //generic json post
-const postJSON = async (uri, payload, token) => {
+export const postJSON = async (uri, payload, token) => {
   //token parameter is optional, if it exists, this function sets it to the authorization header
   try {
     const headers = {
