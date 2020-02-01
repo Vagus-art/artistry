@@ -9,13 +9,22 @@ const mapStateToProps = state => ({
 });
 
 const Post = props => {
-  const [postContent, setPostContent] = useState("");
+  const [postContent, setPostContent] = useState();
+  const [postDescription, setPostDescription] = useState("");
+
   let message = false;
-  const onSubmit = e => {
+
+  const onChange = e => {
+    const file = e.target.files[0];
+    setPostContent(file);
+  };
+
+  const onSubmit = async e => {
     e.preventDefault();
+    const content = await agent.imgurUpload(postContent);
     const response = agent.postJSON(
       "/posts",
-      { nickname: props.user.nickname, content: postContent },
+      { id: props.user.id, content: content, description: postDescription },
       props.token
     ); // I need to require token validation next
     if (response.hasOwnProperty("error")) {
@@ -29,9 +38,10 @@ const Post = props => {
       <form onSubmit={onSubmit}>
         <textarea
           name="post-content"
-          value={postContent}
-          onChange={e => setPostContent(e.target.value)}
+          value={postDescription}
+          onChange={e => setPostDescription(e.target.value)}
         />
+        <input type="file" onChange={onChange} required />
         <input type="submit" value="Post" />
       </form>
       {message && <h1>{message}</h1>}
@@ -41,4 +51,7 @@ const Post = props => {
 
 //connectedpost has router props
 const connectedPost = withRouter(Post);
-export default connect(mapStateToProps, null)(connectedPost);
+export default connect(
+  mapStateToProps,
+  null
+)(connectedPost);

@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = {
-  nickname: String,
+  id: String,
   content: String,
+  description: String,
   tags: Array,
   date: String
 };

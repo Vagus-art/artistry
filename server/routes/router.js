@@ -103,8 +103,9 @@ router.post("/posts", async (req, res) => {
   try {
     const now = new Date();
     const post = new postModel({
-      nickname: req.body.nickname,
+      id: req.body.id,
       content: req.body.content,
+      description: req.body.description,
       tags: req.body.tags,
       date: now.toLocaleDateString()
     });
@@ -137,7 +138,7 @@ router.get('/user',async (req,res)=>{
   const user = await userModel.findOne({_id:req.query.id});
   if(user){
     const {nickname, profileimg, email} = user;
-    res.status(200).json({nickname, profileimg, email});
+    res.status(200).json({nickname, profileimg, email, id:req.query.id});
   }
   else{
     res.status(404).json({error:"user not found"});

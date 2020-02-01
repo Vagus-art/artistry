@@ -26,8 +26,9 @@ const Home = props => {
           props.posts.map(post => {
             return (
               <div className="postito">
-                <a>{post.nickname}</a>
-                <p>{post.content}</p>
+                <a>{post.id}</a>
+                <img src={post.content} alt="post" />
+                <p>{post.description}</p>
                 <p>{post.date}</p>
               </div>
             );
