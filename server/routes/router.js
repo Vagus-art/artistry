@@ -56,7 +56,8 @@ router.post("/signup", async (req, res) => {
       const user = new userModel({
         nickname: req.body.nickname,
         password: await bcrypt.hash(req.body.password, 10),
-        email: req.body.email
+        email: req.body.email,
+        profileimg: "https://elysator.com/wp-content/uploads/blank-profile-picture-973460_1280-e1523978675847.png"
       });
       await user.save();
       res.status(200).json({ message: "Registered succesfully" });

@@ -34,29 +34,42 @@ const NavBar = props => {
     <>
       <div className="Overlay" ref={overlay} onClick={sidemenutrigger}></div>
       <div className="SideMenu" ref={sidemenu}>
-        <ul className="NavBarMenu column">
-          <Link to="/">
-            <li onClick={sidemenutrigger}>Home</li>
-          </Link>
-          <Link to="/profile">
-            <li onClick={sidemenutrigger}>Profile</li>
-          </Link>
-          <Link to="/settings">
-            <li onClick={sidemenutrigger}>Settings</li>
-          </Link>
-          <Link>
-            <li
-              onClick={() => {
-                auth.logout();
-                sidemenutrigger();
-                props.history.replace("/");
-              }}
-            >
-              Logout
-            </li>
-          </Link>
-        </ul>
+        {props.user && (
+          <ul className="NavBarMenu column">
+            <Link to="/profile">
+              <li onClick={sidemenutrigger}>
+                <div className="navprofile-wrapper">
+                  <img
+                    src={props.user.profileimg}
+                    alt="profile"
+                    className="navprofile-small"
+                  />
+                  <p className="navprofile-nickname">{props.user.nickname}</p>
+                  <p className="navprofile-email">{props.user.email}</p>
+                </div>
+              </li>
+            </Link>
+            <Link to="/">
+              <li onClick={sidemenutrigger}>Home</li>
+            </Link>
+            <Link to="/settings">
+              <li onClick={sidemenutrigger}>Settings</li>
+            </Link>
+            <Link>
+              <li
+                onClick={() => {
+                  auth.logout();
+                  sidemenutrigger();
+                  props.history.replace("/");
+                }}
+              >
+                Logout
+              </li>
+            </Link>
+          </ul>
+        )}
       </div>
+
       <div className="NavBar">
         <ul className="NavBarMenu">
           {!props.user && (
@@ -66,7 +79,13 @@ const NavBar = props => {
           )}
           {props.user && (
             <Link>
-              <li onClick={sidemenutrigger}>H</li>
+              <li onClick={sidemenutrigger}>
+                <img
+                  className="navprofile-small"
+                  src={props.user.profileimg}
+                  alt="profile"
+                />
+              </li>
             </Link>
           )}
           <li className="searchli">
@@ -77,12 +96,8 @@ const NavBar = props => {
               placeholder="search"
             />
           </li>
-          {props.user && (
-            <Link to="/settings">
-              <li>Settings</li>
-            </Link>
-          )}
         </ul>
+
         {!props.user && (
           <ul className="NavBarMenu">
             <Link to="/login">
