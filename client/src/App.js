@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Profile from "./components/Profile";
+import ViewProfile from "./components/ViewProfile";
 import Settings from "./components/Settings";
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
@@ -23,6 +24,7 @@ function App(props) {
         <NavBar />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route path="/viewprofile" component={ViewProfile} />
           {props.user && (
             <>
               <Route

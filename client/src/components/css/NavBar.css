@@ -81,6 +81,11 @@
     height:80px;
     border-radius:50%;
 }
+.navprofile-bigger{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+}
 .navprofile-small{
     width:40px;
     height:40px;
