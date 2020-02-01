@@ -16,8 +16,10 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  overflow-x: hidden;
 }
 .postito{
+  overflow-x: hidden;
   max-width: 100%;
   display:flex;
   flex-direction: column;
