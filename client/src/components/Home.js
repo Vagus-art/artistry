@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import agent from "../agent";
+import Posted from "./Posted";
 
 //get posts from redux
 const mapStateToProps = state => ({
@@ -24,14 +25,7 @@ const Home = props => {
       <div className="posts-wrapper">
         {props.posts.length > 0 ? (
           props.posts.map(post => {
-            return (
-              <div className="postito">
-                <a>{post.id}</a>
-                <img src={post.content} alt="post" />
-                <p>{post.description}</p>
-                <p>{post.date}</p>
-              </div>
-            );
+            return <Posted post={post} />;
           })
         ) : (
           <h1>Loading</h1>
@@ -41,4 +35,7 @@ const Home = props => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);
