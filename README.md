@@ -16,6 +16,7 @@
 - profile pages for users, using query strings with user id.
 - user posts in profile page.
 - image in posts.
+- search functionality, using nickname, and description.
 
 ### Usage (dev):
 
