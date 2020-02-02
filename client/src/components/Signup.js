@@ -45,36 +45,38 @@ const Signup = props => {
     }
   };
   return (
-    <div id="login">
-      <h1>Sign up</h1>
-      <h2>{message}</h2>
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          name="user"
-          placeholder="user"
-          value={user}
-          onChange={onChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-          value={password}
-          onChange={onChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="email"
-          value={email}
-          onChange={onChange}
-          required
-        />
-        <input type="submit" value="Sign up" />
-      </form>
+    <div id="form">
+      <div id="formscreen">
+        <form onSubmit={onSubmit} id="form-form">
+          <h1>Sign up</h1>
+          <h2>{message}</h2>
+          <input
+            type="text"
+            name="user"
+            placeholder="user"
+            value={user}
+            onChange={onChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+            value={password}
+            onChange={onChange}
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="email"
+            value={email}
+            onChange={onChange}
+            required
+          />
+          <input type="submit" value="Sign up" />
+        </form>
+      </div>
     </div>
   );
 };

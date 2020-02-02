@@ -40,28 +40,30 @@ const Login = props => {
     }
   };
   return (
-    <div id="login">
-      <h1>Log in</h1>
-      <h2>{message}</h2>
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          name="user"
-          placeholder="user"
-          value={userLogin}
-          onChange={onChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-          value={passwordLogin}
-          onChange={onChange}
-          required
-        />
-        <input type="submit" value="Log in" />
-      </form>
+    <div id="form">
+      <div id="formscreen">
+        <form onSubmit={onSubmit} id="form-form">
+          <h1>Log in</h1>
+          <h2>{message}</h2>
+          <input
+            type="text"
+            name="user"
+            placeholder="user"
+            value={userLogin}
+            onChange={onChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+            value={passwordLogin}
+            onChange={onChange}
+            required
+          />
+          <input type="submit" value="Log in" />
+        </form>
+      </div>
     </div>
   );
 };
