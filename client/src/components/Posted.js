@@ -11,12 +11,15 @@ const Posted = props => {
   }, []);
   return (
     <div className="postito">
-      <img src={props.post.content} alt="post" />
+      <img src={props.post.content} alt="post" className="post-img" />
+      <div className="post-overlay" />
       <Link to={"/viewprofile?id=".concat(props.post.id)}>
-        <h3>{user.nickname}</h3>
+        <div className="post-nickname">
+          <img className="navprofile-small postprofile" src={user.profileimg} alt="p"/>
+          <h5>{user.nickname}</h5>
+        </div>
       </Link>
-      <p>{props.post.description}</p>
-      <p>{props.post.date}</p>
+      <p className="post-date">{props.post.date}</p>
     </div>
   );
 };

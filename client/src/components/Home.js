@@ -21,7 +21,6 @@ const Home = props => {
   }, []);
   return (
     <div>
-      <h1 style={{ textAlign: "center" }}>Home</h1>
       <div className="posts-wrapper">
         {props.posts.length > 0 ? (
           props.posts.map(post => {

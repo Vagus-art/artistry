@@ -78,15 +78,13 @@ const NavBar = props => {
             </Link>
           )}
           {props.user && (
-            <Link>
-              <li onClick={sidemenutrigger}>
-                <img
-                  className="navprofile-small"
-                  src={props.user.profileimg}
-                  alt="profile"
-                />
-              </li>
-            </Link>
+            <li onClick={sidemenutrigger}>
+              <img
+                className="navprofile-small"
+                src={props.user.profileimg}
+                alt="profile"
+              />
+            </li>
           )}
           <li className="searchli">
             <input
