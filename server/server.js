@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 //backend framework
 
+const path = require("path");
+
 const router = require("./routes/router.js");
 //routing
 
@@ -19,6 +21,7 @@ const port = process.env.PORT || 4000;
 //MIDDLEWARE
 
 app.use("/", express.static("../client/build"));
+
 //serve compiled react static page
 
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -41,6 +44,11 @@ app.use((req, res, next) => {
 
 app.use("/api", router);
 //main REST API router
+
+app.get("/*", (req,res)=>{
+  res.sendFile(path.join(__dirname , '/../client/build/index.html'));
+})
+//catch unhandled server routes
 
 //server start
 app.listen(port, () => console.log(`Server listening on port ${port}`));
