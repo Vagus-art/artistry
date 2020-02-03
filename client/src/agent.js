@@ -44,7 +44,7 @@ const imgurUpload = async (file) => {
   const response = await fetch('https://api.imgur.com/3/image',{
       method:'post',
       headers:{
-        'Authorization':'Client-ID 2d9eb78dab2f6f0'
+        'Authorization':'Client-ID 3d0f6a040d42500'
       },
       body:file
     });
@@ -52,7 +52,7 @@ const imgurUpload = async (file) => {
     const id = json.data.id;
     const responseimg = await fetch('https://api.imgur.com/3/image/'+id,{
       headers:{
-        'Authorization':'Client-ID 2d9eb78dab2f6f0'
+        'Authorization':'Client-ID 3d0f6a040d42500'
       }
     });
     const responseimgjson = await responseimg.json()
