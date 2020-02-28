@@ -74,7 +74,7 @@ const Signup = props => {
             onChange={onChange}
             required
           />
-          <input type="submit" value="Sign up" />
+          <input type="submit" value="Sign up" className="form-btn" />
         </form>
       </div>
     </div>

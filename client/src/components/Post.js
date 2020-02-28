@@ -34,17 +34,21 @@ const Post = props => {
     }
   };
   return (
-    <div className="post">
-      <form onSubmit={onSubmit}>
-        <textarea
-          name="post-content"
-          value={postDescription}
-          onChange={e => setPostDescription(e.target.value)}
-        />
-        <input type="file" onChange={onChange} required />
-        <input type="submit" value="Post" />
-      </form>
-      {message && <h1>{message}</h1>}
+    <div id="form">
+      <div className="post" id="formscreen">
+        <form onSubmit={onSubmit} id="form-form">
+          <h1>Post your art</h1>
+          <textarea
+            name="post-content"
+            value={postDescription}
+            onChange={e => setPostDescription(e.target.value)}
+            className="post-text"
+          />
+          <input type="file" onChange={onChange} required />
+          <input type="submit" value="Post" className="form-btn"/>
+        </form>
+        {message && <h1>{message}</h1>}
+      </div>
     </div>
   );
 };
