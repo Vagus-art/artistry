@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #484848;
 }
 * {
   margin: 0;
@@ -27,34 +28,34 @@ body {
   height: 40px;
   border-radius: 50%;
 }
+.navprofile-xsmall {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
 .posts-wrapper {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
-  overflow-x: hidden;
+  text-align: center;
 }
 .postito {
   overflow: hidden;
-  max-width: 400px;
-  display: flex;
+  width:300px;
+  height:300px;
+  background-position: center;
+  background-size: cover;
+  display: inline-flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  text-align: center; 
   margin: 5px;
   border-radius: 5px;
   position: relative;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
-.postito > img {
-  max-width: 100%;
-}
 .post-nickname,
 .post-date {
   position: absolute;
-  font-size: 1.5em;
+  font-size: 0.8em;
   color: white;
 }
 .post-nickname {
@@ -62,6 +63,7 @@ body {
   left: 5px;
   display: flex;
   padding: 5px;
+  font-size: 1em;
   align-items: center;
 }
 .post-date {
@@ -76,7 +78,7 @@ body {
   background: linear-gradient(
     180deg,
     rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0) 80px,
+    rgba(0, 0, 0, 0) 60px,
     rgba(0, 0, 0, 0) 86%,
     rgba(0, 0, 0, 1) 100%
   );
@@ -91,11 +93,15 @@ body {
   width: 50px;
   border-radius: 50%;
   border: none;
-  background-color: #263238;
+  background-color: #ef6c00;
   color: white;
-  font-size: 2em;
+  font-size: 1.5em;
+  font-weight: lighter;
   text-align: center;
   height: 50px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
 .post-btn:hover {
   cursor: pointer;
@@ -204,4 +210,101 @@ h2 {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+
+/*taken from other of my projects*/
+
+.home-screen{
+  position:relative;
+  display:flex !important;
+  justify-content: center;
+  align-items: center;
+  overflow:hidden;
+  height:50vh;
+  padding:10px;
+  width:100%;
+  background: linear-gradient(0deg, rgba(38,50,56,1) 0%, rgba(0,10,18,1) 56%);
+  box-shadow: inset 0 0px 38px rgba(0,0,0,0.5), inset 0 0px 12px rgba(0,0,0,0.5);
+}
+.home-stars{
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+  z-index:0;
+  position:absolute;
+  width:inherit;
+  height:inherit;
+  background-image:
+  radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+  radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+  radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
+  radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
+  background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+  animation-name: star-animation;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  transition: opacity 0.1s;
+}
+@keyframes star-animation {
+  10%{
+    opacity:1;
+  }
+  15%{
+    opacity:0.8;
+  }
+  25%{
+    opacity:1;
+  }
+  30%{
+    opacity:0.8;
+  }
+  35%{
+    opacity:1;
+  }
+}
+.home-title{
+  position:absolute;
+  color:white;
+  font-size: large;
+  opacity:0.8;
+  text-shadow: -4px 3px 0px rgba(0,0,0,0.25);
+  z-index:2;
+}
+.raven-drawing{
+  max-width: 50vw;
+  max-height:50vh;
+  min-width:45vh;
+  height:auto;
+  position: absolute;
+  left:-5vw;
+  z-index:1;
+  bottom:-10vh;
+}
+@media (max-width:800px) {
+  .onbig{
+    display:none !important;
+    visibility: hidden;
+  }
+  .CompanyLogo{
+    width:40%;
+    float:left;
+  }
+  .about-section{
+    margin:0 !important;
+  }
+  .home-title{
+    position:initial;
+    color:black;
+    text-shadow: none;
+  }
+}
+@media (min-width:800px) {
+  .onsmall{
+    display:none;
+    visibility: hidden;
+  }
 }

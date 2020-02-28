@@ -2,11 +2,11 @@
     position:sticky;
     z-index: 10;
     width:100%;
-    background-color: #263238;
+    background-color: #212121;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .SideMenu{
-    background-color: #263238;
+    background-color: #212121;
     z-index:11;
     position:fixed;
     top:0;
@@ -39,9 +39,11 @@
     color:white;
     list-style: none;
     display:flex;
-    justify-content: center;
     flex-direction: row;
     width:inherit;
+}
+.logbtns{
+    justify-content: center;
 }
 .NavBarMenu li{
     padding:10px;
@@ -104,4 +106,15 @@
 .navprofile-email{
     padding-bottom:5px;
     opacity:0.8;
+}
+.brand{
+    flex-grow:1;
+    text-align: center;
+}
+.brand h2{
+    font-weight: lighter;
+}
+.navbar-side{
+    position:absolute;
+    left:0;
 }

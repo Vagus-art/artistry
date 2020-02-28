@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import agent from "../agent";
 import Posted from "./Posted";
+import { ReactComponent as RavenDrawing } from "./img/raven-plain.svg";
 
 //get posts from redux
 const mapStateToProps = state => ({
@@ -21,6 +22,11 @@ const Home = props => {
   }, []);
   return (
     <div>
+      <div className="home-screen onbig">
+        <h1 className="home-title">Welcome to Artistry!</h1>
+        <RavenDrawing className="raven-drawing" />
+        <div className="home-stars"></div>
+      </div>
       <div className="posts-wrapper">
         {props.posts.length > 0 ? (
           props.posts.map(post => {
@@ -34,7 +40,4 @@ const Home = props => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

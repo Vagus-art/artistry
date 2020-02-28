@@ -44,7 +44,7 @@ function App(props) {
         </Switch>
         {props.user && (
           <Link to="/post">
-            <button className="post-btn">+</button>
+            <button className="post-btn"><p>+</p></button>
           </Link>
         )}
       </Router>
